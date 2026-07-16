@@ -84,3 +84,25 @@ Built with AutoIt3 and PowerShell, the tool automates registry and system-level 
 2. Clone the repository:
    ```bash
    git clone https://github.com/JTeam10/idm-trial-reset.git
+
+1. Install IDM (if not installed)
+   ↓
+2. Run IDM Trial Manager as Administrator
+   ↓
+3. Click "Freeze Trial" (Recommended)
+   ↓
+4. IDM will show 30 days trial permanently
+   ↓
+5. No more registration popups! 🎉
+
+⚠️ THIS SOFTWARE IS PROVIDED FOR EDUCATIONAL AND EVALUATION PURPOSES ONLY.
+
+THE USE OF THIS SOFTWARE TO BYPASS LICENSE RESTRICTIONS MAY VIOLATE THE
+TERMS OF SERVICE OF INTERNET DOWNLOAD MANAGER (IDM).
+
+USERS ARE STRONGLY ENCOURAGED TO PURCHASE A VALID LICENSE FROM:
+https://www.internetdownloadmanager.com
+
+THE AUTHOR ASSUMES NO RESPONSIBILITY FOR ANY MISUSE, DAMAGES, OR LEGAL
+CONSEQUENCES ARISING FROM THE USE OF THIS TOOL.
+
