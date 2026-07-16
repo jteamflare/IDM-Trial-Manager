@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Jteam Flare
+Copyright (c) 2026 JTeam10
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,78 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+================================================================================
+
+⚠️ ADDITIONAL DISCLAIMER - LEGAL NOTICE
+
+THIS SOFTWARE IS PROVIDED FOR EDUCATIONAL AND EVALUATION PURPOSES ONLY.
+
+THE USE OF THIS SOFTWARE TO BYPASS LICENSE RESTRICTIONS MAY VIOLATE THE
+TERMS OF SERVICE OF INTERNET DOWNLOAD MANAGER (IDM).
+
+USERS ARE STRONGLY ENCOURAGED TO PURCHASE A VALID LICENSE FROM:
+https://www.internetdownloadmanager.com
+
+THE AUTHOR ASSUMES NO RESPONSIBILITY FOR ANY MISUSE, DAMAGES, OR LEGAL
+CONSEQUENCES ARISING FROM THE USE OF THIS TOOL.
+
+BY USING THIS SOFTWARE, YOU ACKNOWLEDGE THAT:
+- You are using this tool at your own risk
+- You will not hold the author liable for any damages or legal issues
+- You understand that this tool may violate IDM's Terms of Service
+- You agree to purchase a legitimate license if you continue using IDM
+- You are using this software for educational purposes only
+
+================================================================================
+
+PROJECT INFORMATION
+
+Project Name:     IDM Trial Manager
+Version:          1.2.0
+Author:           JTeam10
+License:          MIT License
+Purpose:          Educational & Evaluation Tool
+Repository:       https://github.com/JTeam10/idm-trial-reset
+SourceForge:      https://sourceforge.net/projects/idm-trial-manager
+Support IDM:      https://www.internetdownloadmanager.com
+
+================================================================================
+
+📌 HOW TO USE THIS SOFTWARE
+
+1. Run the main executable (IDM Trial Manager v1.2.0.exe)
+2. If IDM is not installed, click "Download IDM" to visit the official site
+3. After installation, choose one of three options:
+   - "Freeze Trial": Permanently freeze the 30-day trial period (Recommended)
+   - "Get Serial": Get a 180-day serial key (May show fake serial nag screen)
+   - "Reset Now": Reset activation and trial keys
+
+NOTE: For best results, run as administrator.
+
+================================================================================
+
+🛡️ DISCLAIMER OF LIABILITY
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+================================================================================
+
+🔒 TRADEMARK NOTICE
+
+Internet Download Manager (IDM) is a registered trademark of Tonec Inc.
+This project is NOT affiliated with, endorsed by, or sponsored by Tonec Inc.
+All product names, logos, and brands are property of their respective owners.
+
+================================================================================
+
+📅 LAST UPDATED: 2026-07-16
+
+================================================================================
