@@ -68,7 +68,7 @@ Built with AutoIt3 and PowerShell, the tool automates registry and system-level 
 | Platform | Download Link |
 |----------|---------------|
 | **Windows** | [Download from SourceForge](https://sourceforge.net/projects/idm-trial-manager) |
-| **Source Code** | [GitHub Repository](https://github.com/JTeam10/idm-trial-reset) |
+| **Source Code** | [GitHub Repository](https://github.com/jteamflare/IDM-Trial-Manager) |
 
 ---
 
