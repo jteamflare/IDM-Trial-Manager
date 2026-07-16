@@ -57,3 +57,30 @@ Built with AutoIt3 and PowerShell, the tool automates registry and system-level 
 ## 📸 Screenshots
 
 ### Main Interface
+
+
+---
+
+## 📥 Download
+
+### Latest Version: v1.2.0
+
+| Platform | Download Link |
+|----------|---------------|
+| **Windows** | [Download from SourceForge](https://sourceforge.net/projects/idm-trial-manager) |
+| **Source Code** | [GitHub Repository](https://github.com/JTeam10/idm-trial-reset) |
+
+---
+
+## 🚀 Installation
+
+### Option 1: Pre-compiled EXE (Recommended)
+1. Download the latest release from [SourceForge](https://sourceforge.net/projects/idm-trial-manager)
+2. Run `IDM Trial Manager.exe`
+3. **No installation required!**
+
+### Option 2: Compile from Source
+1. Install [AutoIt3](https://www.autoitscript.com/site/autoit/)
+2. Clone the repository:
+   ```bash
+   git clone https://github.com/JTeam10/idm-trial-reset.git
