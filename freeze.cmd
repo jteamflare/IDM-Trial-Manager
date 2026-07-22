@@ -2,43 +2,12 @@
 @setlocal DisableDelayedExpansion
 @echo off
 
-
-
-::============================================================================
-::
-::   IDM Activation Script (IAS)
-::
-::   Homepages: https://github.com/lstprjct/IDM-Activation-Script
-::              https://t.me/ModByPiash/5
-::
-::       Telegram: @Stripe_op
-::
-::============================================================================
-
-
-
-::  To activate, run the script with "/act" parameter or change 0 to 1 in below line
-set _activate=0
-
-::  To Freeze the 30 days trial period, run the script with "/frz" parameter or change 0 to 1 in below line
 set _freeze=1
-
-::  To reset the activation and trial, run the script with "/res" parameter or change 0 to 1 in below line
-set _reset=0
-
-::  If value is changed in above lines or parameter is used then script will run in unattended mode
-
-::========================================================================================================================================
-
-::  Set Path variable, it helps if it is misconfigured in the system
 
 set "PATH=%SystemRoot%\System32;%SystemRoot%\System32\wbem;%SystemRoot%\System32\WindowsPowerShell\v1.0\"
 if exist "%SystemRoot%\Sysnative\reg.exe" (
 set "PATH=%SystemRoot%\Sysnative;%SystemRoot%\Sysnative\wbem;%SystemRoot%\Sysnative\WindowsPowerShell\v1.0\;%PATH%"
 )
-
-:: Re-launch the script with x64 process if it was initiated by x86 process on x64 bit Windows
-:: or with ARM64 process if it was initiated by x86/ARM32 process on ARM64 Windows
 
 set "_cmdf=%~f0"
 for %%# in (%*) do (
@@ -52,20 +21,14 @@ start %SystemRoot%\Sysnative\cmd.exe /c ""!_cmdf!" %* r1"
 exit /b
 )
 
-:: Re-launch the script with ARM32 process if it was initiated by x64 process on ARM64 Windows
-
 if exist %SystemRoot%\SysArm32\cmd.exe if %PROCESSOR_ARCHITECTURE%==AMD64 if not defined r2 (
 setlocal EnableDelayedExpansion
 start %SystemRoot%\SysArm32\cmd.exe /c ""!_cmdf!" %* r2"
 exit /b
 )
 
-::========================================================================================================================================
-
 set "blank="
 set "mas=https://github.com/lstprjct/IDM-Activation-Script/wiki/"
-
-::  Check if Null service is working, it's important for the batch script
 
 sc query Null | find /i "RUNNING"
 if %errorlevel% NEQ 0 (
@@ -80,8 +43,6 @@ ping 127.0.0.1 -n 10
 )
 cls
 
-::  Check LF line ending
-
 pushd "%~dp0"
 >nul findstr /v "$" "%~nx0" && (
 echo:
@@ -93,30 +54,21 @@ exit /b
 )
 popd
 
-::========================================================================================================================================
-
 cls
 color 07
-title  IDM Activation Script %iasver%
+title IDM Activation Script %iasver%
 
 set _args=
 set _elev=
-set _unattended=0
+set _unattended=1
 
 set _args=%*
 if defined _args set _args=%_args:"=%
 if defined _args (
 for %%A in (%_args%) do (
-if /i "%%A"=="-el"  set _elev=1
-if /i "%%A"=="/res" set _reset=1
-if /i "%%A"=="/frz" set _freeze=1
-if /i "%%A"=="/act" set _activate=1
+if /i "%%A"=="-el" set _elev=1
 )
 )
-
-for %%A in (%_activate% %_freeze% %_reset%) do (if "%%A"=="1" set _unattended=1)
-
-::========================================================================================================================================
 
 set "nul1=1>nul"
 set "nul2=2>nul"
@@ -133,20 +85,20 @@ if %winbuild% GEQ 10586 reg query "HKCU\Console" /v ForceV2 %nul2% | find /i "0x
 
 if %_NCS% EQU 1 (
 for /F %%a in ('echo prompt $E ^| cmd') do set "esc=%%a"
-set     "Red="41;97m""
-set    "Gray="100;97m""
-set   "Green="42;97m""
-set    "Blue="44;97m""
-set  "_White="40;37m""
-set  "_Green="40;92m""
+set "Red="41;97m""
+set "Gray="100;97m""
+set "Green="42;97m""
+set "Blue="44;97m""
+set "_White="40;37m""
+set "_Green="40;92m""
 set "_Yellow="40;93m""
 ) else (
-set     "Red="Red" "white""
-set    "Gray="Darkgray" "white""
-set   "Green="DarkGreen" "white""
-set    "Blue="Blue" "white""
-set  "_White="Black" "Gray""
-set  "_Green="Black" "Green""
+set "Red="Red" "white""
+set "Gray="Darkgray" "white""
+set "Green="DarkGreen" "white""
+set "Blue="Blue" "white""
+set "_White="Black" "Gray""
+set "_Green="Black" "Green""
 set "_Yellow="Black" "Yellow""
 )
 
@@ -154,8 +106,6 @@ set "nceline=echo: &echo ==== ERROR ==== &echo:"
 set "eline=echo: &call :_color %Red% "==== ERROR ====" &echo:"
 set "line=___________________________________________________________________________________________________"
 set "_buf={$W=$Host.UI.RawUI.WindowSize;$B=$Host.UI.RawUI.BufferSize;$W.Height=34;$B.Height=300;$Host.UI.RawUI.WindowSize=$W;$Host.UI.RawUI.BufferSize=$B;}"
-
-::========================================================================================================================================
 
 if %winbuild% LSS 7600 (
 %nceline%
@@ -169,10 +119,6 @@ for %%# in (powershell.exe) do @if "%%~$PATH:#"=="" (
 echo Unable to find powershell.exe in the system.
 goto done2
 )
-
-::========================================================================================================================================
-
-::  Fix for the special characters limitation in path name
 
 set "_work=%~dp0"
 if "%_work:~-1%"=="\" set "_work=%_work:~0,-1%"
@@ -188,8 +134,6 @@ set "_ttemp=%userprofile%\AppData\Local\Temp"
 
 setlocal EnableDelayedExpansion
 
-::========================================================================================================================================
-
 echo "!_batf!" | find /i "!_ttemp!" %nul1% && (
 if /i not "!_work!"=="!_ttemp!" (
 %eline%
@@ -200,12 +144,6 @@ echo Extract the archive file and launch the script from the extracted folder.
 goto done2
 )
 )
-
-::========================================================================================================================================
-
-::  Check PowerShell
-
-REM :PowerShellTest: $ExecutionContext.SessionState.LanguageMode :PowerShellTest:
 
 %psc% "$f=[io.file]::ReadAllText('!_batp!') -split ':PowerShellTest:\s*';iex ($f[1])" | find /i "FullLanguage" %nul1% || (
 %eline%
@@ -218,10 +156,6 @@ echo Check this page for help. %mas%IAS-Help#troubleshoot
 goto done2
 )
 
-::========================================================================================================================================
-
-::  Elevate script as admin and pass arguments and preventing loop
-
 %nul1% fltmc || (
 if not defined _elev %psc% "start cmd.exe -arg '/c \"!_PSarg!\"' -verb runas" && exit /b
 %eline%
@@ -230,17 +164,8 @@ echo To do so, right click on this script and select 'Run as administrator'.
 goto done2
 )
 
-::========================================================================================================================================
-
-::  Disable QuickEdit and launch from conhost.exe to avoid Terminal app
-
 set quedit=
-set terminal=
-
-if %_unattended%==1 (
-set quedit=1
 set terminal=1
-)
 
 for %%# in (%_args%) do (if /i "%%#"=="-qedit" set quedit=1)
 
@@ -263,15 +188,11 @@ if defined quedit goto :skipQE
 %launchcmd% "%d1% %d2% %d3% %d4% & cmd.exe '/c' '!_PSarg! -qedit'" &exit /b
 :skipQE
 
-::========================================================================================================================================
-
 cls
-title  IDM Activation Script %iasver%
+title IDM Activation Script %iasver%
 
 echo:
 echo Initializing...
-
-::  Check WMI
 
 %psc% "Get-WmiObject -Class Win32_ComputerSystem | Select-Object -Property CreationClassName" %nul2% | find /i "computersystem" %nul1% || (
 %eline%
@@ -283,11 +204,9 @@ echo Check this page for help. %mas%IAS-Help#troubleshoot
 goto done2
 )
 
-::  Check user account SID
-
 set _sid=
 for /f "delims=" %%a in ('%psc% "([System.Security.Principal.NTAccount](Get-WmiObject -Class Win32_ComputerSystem).UserName).Translate([System.Security.Principal.SecurityIdentifier]).Value" %nul6%') do (set _sid=%%a)
- 
+
 reg query HKU\%_sid%\Software %nul% || (
 for /f "delims=" %%a in ('%psc% "$explorerProc = Get-Process -Name explorer | Where-Object {$_.SessionId -eq (Get-Process -Id $pid).SessionId} | Select-Object -First 1; $sid = (gwmi -Query ('Select * From Win32_Process Where ProcessID=' + $explorerProc.Id)).GetOwnerSid().Sid; $sid" %nul6%') do (set _sid=%%a)
 )
@@ -302,10 +221,6 @@ echo Check this page for help. %mas%IAS-Help#troubleshoot
 goto done2
 )
 
-::========================================================================================================================================
-
-::  Check if the current user SID is syncing with the HKCU entries
-
 %nul% reg delete HKCU\IAS_TEST /f
 %nul% reg delete HKU\%_sid%\IAS_TEST /f
 
@@ -317,8 +232,6 @@ set HKCUsync=1
 
 %nul% reg delete HKCU\IAS_TEST /f
 %nul% reg delete HKU\%_sid%\IAS_TEST /f
-
-::  Below code also works for ARM64 Windows 10 (including x64 bit emulation)
 
 for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v PROCESSOR_ARCHITECTURE') do set arch=%%b
 if /i not "%arch%"=="x86" set arch=x64
@@ -343,8 +256,6 @@ if %arch%==x86 set "IDMan=%ProgramFiles%\Internet Download Manager\IDMan.exe"
 if not exist %SystemRoot%\Temp md %SystemRoot%\Temp
 set "idmcheck=tasklist /fi "imagename eq idman.exe" | findstr /i "idman.exe" %nul1%"
 
-::  Check CLSID registry access
-
 %nul% reg add %CLSID2%\IAS_TEST
 %nul% reg query %CLSID2%\IAS_TEST || (
 %eline%
@@ -356,52 +267,10 @@ goto done2
 
 %nul% reg delete %CLSID2%\IAS_TEST /f
 
-::========================================================================================================================================
+set frz=1
+goto :_activate
 
-if %_reset%==1 goto :_reset
-if %_activate%==1 (set frz=0&goto :_activate)
-if %_freeze%==1 (set frz=1&goto :_activate)
-
-:MainMenu
-
-cls
-title  IDM Activation Script %iasver%
-if not defined terminal mode 75, 28
-
-echo:
-echo:
-call :_color2 %_White% "             " %_Green% "Create By PirataSB"
-echo:            ___________________________________________________ 
-echo:
-echo:               Github: https://github.com/RosangelaSB
-echo:            ___________________________________________________ 
-echo:                                                               
-echo:               [1] Activate
-echo:               [2] Freeze Trial
-echo:               [3] Reset Activation / Trial
-echo:               _____________________________________________   
-echo:                                                               
-echo:               [4] Download IDM
-echo:               [5] Help
-echo:               [0] Exit
-echo:            ___________________________________________________
-echo:         
-call :_color2 %_White% "             " %_Green% "Enter a menu option in the Keyboard [1,2,3,4,5,0]"
-choice /C:123450 /N
-set _erl=%errorlevel%
-
-if %_erl%==6 exit /b
-if %_erl%==5 start https://github.com/lstprjct/IDM-Activation-Script & goto MainMenu
-if %_erl%==4 start https://www.internetdownloadmanager.com/download.html & goto MainMenu
-if %_erl%==3 goto _reset
-if %_erl%==2 (set frz=1&goto :_activate)
-if %_erl%==1 (set frz=0&goto :_activate)
-goto :MainMenu
-
-::========================================================================================================================================
-
-:_reset
-
+:_activate
 cls
 if not %HKCUsync%==1 (
 if not defined terminal mode 153, 35
@@ -411,7 +280,32 @@ if not defined terminal mode 113, 35
 if not defined terminal %psc% "&%_buf%" %nul%
 
 echo:
-%idmcheck% && taskkill /f /im idman.exe
+if not exist "%IDMan%" (
+call :_color %Red% "IDM [Internet Download Manager] is not Installed."
+echo You can download it from  https://www.internetdownloadmanager.com/download.html
+goto done
+)
+
+set _int=
+for /f "delims=[] tokens=2" %%# in ('ping -n 1 internetdownloadmanager.com') do (if not [%%#]==[] set _int=1)
+
+if not defined _int (
+%psc% "$t = New-Object Net.Sockets.TcpClient;try{$t.Connect("""internetdownloadmanager.com""", 80)}catch{};$t.Connected" | findstr /i "true" %nul1% || (
+call :_color %Red% "Unable to connect internetdownloadmanager.com, aborting..."
+goto done
+)
+call :_color %Gray% "Ping command failed for internetdownloadmanager.com"
+echo:
+)
+
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName 2^>nul') do set "regwinos=%%b"
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v PROCESSOR_ARCHITECTURE') do set "regarch=%%b"
+for /f "tokens=6-7 delims=[]. " %%i in ('ver') do if "%%j"=="" (set fullbuild=%%i) else (set fullbuild=%%i.%%j)
+for /f "tokens=2*" %%a in ('reg query "HKU\%_sid%\Software\DownloadManager" /v idmvers %nul6%') do set "IDMver=%%b"
+
+echo Checking Info - [%regwinos% ^| %fullbuild% ^| %regarch% ^| IDM: %IDMver%]
+
+%idmcheck% && (echo: & taskkill /f /im idman.exe)
 
 set _time=
 for /f %%a in ('%psc% "(Get-Date).ToString('yyyyMMdd-HHmmssfff')"') do set _time=%%a
@@ -423,19 +317,40 @@ reg export %CLSID% "%SystemRoot%\Temp\_Backup_HKCU_CLSID_%_time%.reg"
 if not %HKCUsync%==1 reg export %CLSID2% "%SystemRoot%\Temp\_Backup_HKU-%_sid%_CLSID_%_time%.reg"
 
 call :delete_queue
-%psc% "$sid = '%_sid%'; $HKCUsync = %HKCUsync%; $lockKey = $null; $deleteKey = 1; $f=[io.file]::ReadAllText('!_batp!') -split ':regscan\:.*';iex ($f[1])"
-
 call :add_key
+
+%psc% "$sid = '%_sid%'; $HKCUsync = %HKCUsync%; $lockKey = 1; $deleteKey = $null; $toggle = 1; $f=[io.file]::ReadAllText('!_batp!') -split ':regscan\:.*';iex ($f[1])"
+
+call :download_files
+if not defined _fileexist (
+%eline%
+echo Error: Unable to download files with IDM.
+echo:
+echo Help: %mas%IAS-Help#troubleshoot
+goto :done
+)
+
+%psc% "$sid = '%_sid%'; $HKCUsync = %HKCUsync%; $lockKey = 1; $deleteKey = $null; $f=[io.file]::ReadAllText('!_batp!') -split ':regscan\:.*';iex ($f[1])"
 
 echo:
 echo %line%
 echo:
-call :_color %Green% "The IDM reset process has been completed."
+call :_color %Green% "The IDM 30 days trial period is successfully freezed for Lifetime."
+echo:
+call :_color %Gray% "If IDM is showing a popup to register, reinstall IDM."
 
-goto done
+:done
+echo %line%
+echo:
+echo:
+timeout /t 2
+exit /b
+
+:done2
+timeout /t 2
+exit /b
 
 :delete_queue
-
 echo:
 echo Deleting IDM registry keys...
 echo:
@@ -474,7 +389,6 @@ set "reg="%%~A"" &reg query !reg! %nul% && call :del
 exit /b
 
 :del
-
 reg delete %reg% /f %nul%
 
 if "%errorlevel%"=="0" (
@@ -487,168 +401,7 @@ call :_color2 %Red% "Failed - !reg!"
 
 exit /b
 
-::========================================================================================================================================
-
-:_activate
-
-cls
-if not %HKCUsync%==1 (
-if not defined terminal mode 153, 35
-) else (
-if not defined terminal mode 113, 35
-)
-if not defined terminal %psc% "&%_buf%" %nul%
-
-if %frz%==0 if %_unattended%==0 (
-echo:
-echo %line%
-echo:
-echo      Activation is not working for some users and IDM may show fake serial nag screen.
-echo:
-call :_color2 %_White% "     " %_Green% "Its recommended to use Freeze Trial option instead."
-echo %line%
-echo:
-choice /C:19 /N /M ">    [1] Go Back [9] Activate : "
-if !errorlevel!==1 goto :MainMenu
-cls
-)
-
-echo:
-if not exist "%IDMan%" (
-call :_color %Red% "IDM [Internet Download Manager] is not Installed."
-echo You can download it from  https://www.internetdownloadmanager.com/download.html
-goto done
-)
-
-:: Internet check with internetdownloadmanager.com ping and port 80 test
-
-set _int=
-for /f "delims=[] tokens=2" %%# in ('ping -n 1 internetdownloadmanager.com') do (if not [%%#]==[] set _int=1)
-
-if not defined _int (
-%psc% "$t = New-Object Net.Sockets.TcpClient;try{$t.Connect("""internetdownloadmanager.com""", 80)}catch{};$t.Connected" | findstr /i "true" %nul1% || (
-call :_color %Red% "Unable to connect internetdownloadmanager.com, aborting..."
-goto done
-)
-call :_color %Gray% "Ping command failed for internetdownloadmanager.com"
-echo:
-)
-
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName 2^>nul') do set "regwinos=%%b"
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v PROCESSOR_ARCHITECTURE') do set "regarch=%%b"
-for /f "tokens=6-7 delims=[]. " %%i in ('ver') do if "%%j"=="" (set fullbuild=%%i) else (set fullbuild=%%i.%%j)
-for /f "tokens=2*" %%a in ('reg query "HKU\%_sid%\Software\DownloadManager" /v idmvers %nul6%') do set "IDMver=%%b"
-
-echo Checking Info - [%regwinos% ^| %fullbuild% ^| %regarch% ^| IDM: %IDMver%]
-
-%idmcheck% && (echo: & taskkill /f /im idman.exe)
-
-set _time=
-for /f %%a in ('%psc% "(Get-Date).ToString('yyyyMMdd-HHmmssfff')"') do set _time=%%a
-
-echo:
-echo Creating backup of CLSID registry keys in %SystemRoot%\Temp
-
-reg export %CLSID% "%SystemRoot%\Temp\_Backup_HKCU_CLSID_%_time%.reg"
-if not %HKCUsync%==1 reg export %CLSID2% "%SystemRoot%\Temp\_Backup_HKU-%_sid%_CLSID_%_time%.reg"
-
-call :delete_queue
-call :add_key
-
-%psc% "$sid = '%_sid%'; $HKCUsync = %HKCUsync%; $lockKey = 1; $deleteKey = $null; $toggle = 1; $f=[io.file]::ReadAllText('!_batp!') -split ':regscan\:.*';iex ($f[1])"
-
-if %frz%==0 call :register_IDM
-
-call :download_files
-if not defined _fileexist (
-%eline%
-echo Error: Unable to download files with IDM.
-echo:
-echo Help: %mas%IAS-Help#troubleshoot
-goto :done
-)
-
-%psc% "$sid = '%_sid%'; $HKCUsync = %HKCUsync%; $lockKey = 1; $deleteKey = $null; $f=[io.file]::ReadAllText('!_batp!') -split ':regscan\:.*';iex ($f[1])"
-
-echo:
-echo %line%
-echo:
-if %frz%==0 (
-call :_color %Green% "The IDM Activation process has been completed."
-echo:
-call :_color %Gray% "If the fake serial screen appears, use the Freeze Trial option instead."
-) else (
-call :_color %Green% "The IDM 30 days trial period is successfully freezed for Lifetime."
-echo:
-call :_color %Gray% "If IDM is showing a popup to register, reinstall IDM."
-)
-
-::========================================================================================================================================
-
-:done
-
-echo %line%
-echo:
-echo:
-if %_unattended%==1 timeout /t 2 & exit /b
-
-if defined terminal (
-call :_color %_Yellow% "Press 0 key to return..."
-choice /c 0 /n
-) else (
-call :_color %_Yellow% "Press any key to return..."
-pause %nul1%
-)
-goto MainMenu
-
-:done2
-
-if %_unattended%==1 timeout /t 2 & exit /b
-
-if defined terminal (
-echo Press 0 key to exit...
-choice /c 0 /n
-) else (
-echo Press any key to exit...
-pause %nul1%
-)
-exit /b
-
-::========================================================================================================================================
-
-:_rcont
-
-reg add %reg% %nul%
-call :add
-exit /b
-
-:register_IDM
-
-echo:
-echo Applying registration details...
-echo:
-
-set /a fname = %random% %% 9999 + 1000
-set /a lname = %random% %% 9999 + 1000
-set email=%fname%.%lname%@tonec.com
-
-for /f "delims=" %%a in ('%psc% "$key = -join ((Get-Random -Count  20 -InputObject ([char[]]('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'))));$key = ($key.Substring(0,  5) + '-' + $key.Substring(5,  5) + '-' + $key.Substring(10,  5) + '-' + $key.Substring(15,  5) + $key.Substring(20));Write-Output $key" %nul6%') do (set key=%%a)
-
-set "reg=HKCU\SOFTWARE\DownloadManager /v FName /t REG_SZ /d "%fname%"" & call :_rcont
-set "reg=HKCU\SOFTWARE\DownloadManager /v LName /t REG_SZ /d "%lname%"" & call :_rcont
-set "reg=HKCU\SOFTWARE\DownloadManager /v Email /t REG_SZ /d "%email%"" & call :_rcont
-set "reg=HKCU\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "%key%"" & call :_rcont
-
-if not %HKCUsync%==1 (
-set "reg=HKU\%_sid%\SOFTWARE\DownloadManager /v FName /t REG_SZ /d "%fname%"" & call :_rcont
-set "reg=HKU\%_sid%\SOFTWARE\DownloadManager /v LName /t REG_SZ /d "%lname%"" & call :_rcont
-set "reg=HKU\%_sid%\SOFTWARE\DownloadManager /v Email /t REG_SZ /d "%email%"" & call :_rcont
-set "reg=HKU\%_sid%\SOFTWARE\DownloadManager /v Serial /t REG_SZ /d "%key%"" & call :_rcont
-)
-exit /b
-
 :download_files
-
 echo:
 echo Triggering a few downloads to create certain registry keys, please wait...
 echo:
@@ -670,23 +423,18 @@ if exist "%file%" del /f /q "%file%"
 exit /b
 
 :download
-
 set /a attempt=0
 if exist "%file%" del /f /q "%file%"
 start "" /B "%IDMan%" /n /d "%link%" /p "%SystemRoot%\Temp" /f temp.png
 
 :check_file
-
 timeout /t 1 %nul1%
 set /a attempt+=1
 if exist "%file%" set _fileexist=1&exit /b
 if %attempt% GEQ 20 exit /b
 goto :Check_file
 
-::========================================================================================================================================
-
 :add_key
-
 echo:
 echo Adding registry key...
 echo:
@@ -696,7 +444,6 @@ set "reg="%HKLM%" /v "AdvIntDriverEnabled2""
 reg add %reg% /t REG_DWORD /d "1" /f %nul%
 
 :add
-
 if "%errorlevel%"=="0" (
 set "reg=%reg:"=%"
 echo Added - !reg!
@@ -705,8 +452,6 @@ set "reg=%reg:"=%"
 call :_color2 %Red% "Failed - !reg!"
 )
 exit /b
-
-::========================================================================================================================================
 
 :regscan:
 $finalValues = @()
@@ -890,10 +635,7 @@ foreach ($regPath in $regPaths) {
 }
 :regscan:
 
-::========================================================================================================================================
-
 :_color
-
 if %_NCS% EQU 1 (
 echo %esc%[%~1%~2%esc%[0m
 ) else (
@@ -902,13 +644,9 @@ echo %esc%[%~1%~2%esc%[0m
 exit /b
 
 :_color2
-
 if %_NCS% EQU 1 (
 echo %esc%[%~1%~2%esc%[%~3%~4%esc%[0m
 ) else (
 %psc% write-host -back '%1' -fore '%2' '%3' -NoNewline; write-host -back '%4' -fore '%5' '%6'
 )
 exit /b
-
-::========================================================================================================================================
-:: Leave empty line below
