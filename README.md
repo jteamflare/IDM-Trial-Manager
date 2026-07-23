@@ -9,6 +9,8 @@
 
 ---
 
+![Screenshot_2](https://github.com/jteamflare/IDM-Trial-Manager/blob/a6c09303618ddb882d1ddbc3311d10500223beca/og-image.webp)
+
 ## 📋 Table of Contents
 
 - [About](#-about)
