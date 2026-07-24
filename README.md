@@ -1,4 +1,4 @@
-# 🛠️ IDM Trial Manager v1.2.0 Build-2026
+# 🛠️ IDM Trial Manager V1.2.0 Build 2026
 
 > **⚠️ DISCLAIMER: EDUCATIONAL & EVALUATION PURPOSE ONLY**
 > 
